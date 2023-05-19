@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./assets/style.css" type="text/css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="grid-container">
+      <header id="header">
+        <h1>Riddle me this.</h1>
+        <div id="navScore">
+
+
+          
+          <div id="timerContainer">
+            <span id="timerDisplay"></span>
+          </div>
+        </div>
+      </header>
+
+      <main id="main">
+        <div id="question">
+          <h3 id="questionText">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
+            consequatur nisi praesentium nulla incidunt, optio eaque quisquam
+            odio consectetur voluptatibus?
+          </h3>
+        </div>
+
+        <div id="answerText">
+          <ol>
+            <li id="answerTextA" class="answerText"></li>
+            <li id="answerTextB" class="answerText"></li>
+            <li id="answerTextC" class="answerText"></li>
+          </ol>
+        </div>
+
+        <div id="answers">
+          <button class="answer button" data-choice="A">A</button>
+          <button class="answer button" data-choice="B">B</button>
+          <button class="answer button" data-choice="C">C</button>
+        </div>
+        <button id="skipButton" class="button little">skip</button>
+      </main>
+      <aside id="aside">
+        <table id="highScores"></table>
+        <div id="scoreContainer">
+            Score: <span id="scoreDisplay"></span>
+          </div>
+      </aside>
+      <footer id="footer">"who's afraid of the big, black bat?"</footer>
+    </div>
+  </body>
+  <dialog id="gameOverDialog">
+    <div id="highScoreBox">
+      <h2>
+        <div id="gameOverMessage"></div>
+        <div id="displayHighScore"></div>
+      </h2>
+      <input
+        type="text"
+        id="highScoreName"
+        placeholder="Name"
+        rows="1"
+        autofocus
+      />
+      <button id="highScoreConfirm" class="button">confirm</button>
+    </div>
+  </dialog>
+  <script src="./assets/questions.js"></script>
+  <script src="./assets/script.js"></script>
+</html>

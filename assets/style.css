@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Mako&family=Wix+Madefor+Display:wght@500&display=swap');
+
+:root {
+  --darkerColor: #333333;
+  --lightColor: #fffcf3;
+  --panelColor: #ffc037;
+  --accentColor: #a119b3;
+  --darkColor: #b918b1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--darkerColor);
+  color: var(--lightColor);
+  font-family: 'Wix Madefor Display', sans-serif;
+}
+
+#grid-container {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "main main aside"
+    "footer footer footer";
+  grid-template-columns: 10% 65% 25%;
+  grid-template-rows: 13% 80% 7%;
+  min-height: 100vh;
+}
+
+#header {
+  grid-area: header;
+  background-color: var(--panelColor);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
+}
+
+h1 {
+  padding: 30px;
+}
+
+#navScore {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+
+.button {
+  cursor: pointer;
+  margin: 10px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 18px;
+  background-color: var(--accentColor);
+  color: var(--lightColor);
+  font-size: larger;
+  font-weight: 400;
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 2px;
+  transition: all 0.3s;
+}
+
+.button:hover {
+  background-color: var(--darkColor);
+}
+
+.bigify {
+    transform: scale(1.5);
+    transition: all .5s; 
+}
+
+.redify {
+  transform: scale(2);
+  background-color: var(--darkerColor);
+  color: var(--panelColor);
+}
+
+.little {
+    height: min-content;
+    padding: 5px 5px;
+    position: absolute;
+    right: 5px;
+    bottom: 0px;
+}
+
+
+#timerContainer {
+    background-color: var(--accentColor);
+    border-radius: 50%;
+    padding: 3vw;
+    z-index: 1;
+    font-size: 62px;
+    transition: all .5s; 
+}
+
+#scoreContainer {
+    font-size: xx-large;
+}
+
+#footer {
+  display: flex;
+  grid-area: footer;
+  background-color: var(--panelColor);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#aside {
+  grid-area: aside;
+  background-color: var(--darkColor);
+  color: var(--lightColor);
+  padding: 8px;
+  flex: auto;
+}
+
+#highScores {
+  font-family: 'Anton', sans-serif;
+  width: 100%;
+  border-collapse: collapse;
+  letter-spacing: 2px;
+}
+
+#highScoreName {
+  visibility: hidden;
+}
+
+#highScores td {
+  border: 1px solid var(--lightColor);
+  padding: 4px;
+}
+
+#main {
+  display: flex;
+  flex-wrap: wrap;
+  grid-area: main;
+  width: 100%;
+  background-color: var(--lightColor);
+  color: var(--darkerColor);
+}
+
+#question {
+  display: flex;
+  padding: 1.5rem;
+
+  width: 100%;
+}
+
+#question h3 {
+  font-size: x-large;
+}
+
+#answerText {
+}
+
+#answerText ol {
+  font-size: x-large;
+  list-style-position: inside;
+  list-style-type: upper-alpha;
+}
+
+#answerText ol li {
+  padding: 0.5rem;
+}
+
+#answers {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  width: 100%;
+  justify-content: space-around;
+  background-color: var(--lightColor);
+  color: var(--darkerColor);
+  max-height: 150px;
+}
+
+.answer {
+  border-radius: 50%;
+  padding: 10px 30px;
+  font-size: xxx-large;
+  max-height: 90px;
+  
+}
+
+.answer:hover {
+  transform: scale(1.2);
+}
+
+#timerDisplay {
+  padding: 15px;
+}
+
+#scoreDisplay {
+  padding: 15px;
+}
+
+#gameOverDialog {
+  padding: 25px;
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 6px solid var(--darkColor);
+  border-radius: 18px;
+  color: var(--accentColor);
+  background-color: var(--panelColor);
+  filter: drop-shadow(0 0 18px var(--darkColor));
+}
+
+#highScoreBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.highScoreConfirm {
+  display: flex;
+  flex: 1 0;
+}
+
+#highScoreName {
+  display: flex;
+  border: none;
+  height: 40px;
+  padding: 16px;
+  border-radius: 16px;
+  letter-spacing: 2px;
+}
+
+#gameOverDialog::backdrop {
+  backdrop-filter: blur(4px);
+}
+
+#gameOverDialog h2 {
+  text-align: center;
+}
+
+#displayHighScore {
+  font-size: xxx-large;
+}
+
+@media screen and (max-width: 600px) {
+  #grid-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #timerContainer {
+
+    position: absolute;
+    top: 100px;
+    font-size: large;
+  }
+
+}
