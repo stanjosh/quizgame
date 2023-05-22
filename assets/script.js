@@ -26,6 +26,10 @@ const choiceB = document.getElementById("choiceB");
 const choiceC = document.getElementById("choiceC");
 
 
+document.getElementById('startButton').addEventListener('click', () => {
+  document.getElementById('titleScreen').close();
+  init()})
+
 var highScoreList = [
   { name: "rigby", score: 100 },
   { name: "muscle man", score: 400 },
@@ -179,4 +183,5 @@ function punchFade(elem) {
   opacity = 50;
 }
 
-init();
+
+document.getElementById('titleScreen').showModal()

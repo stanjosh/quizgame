@@ -229,7 +229,7 @@ h1 {
   filter: drop-shadow(0 0 18px var(--darkColor));
 }
 
-#highScoreBox {
+#highScoreBox  {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -250,7 +250,24 @@ h1 {
   letter-spacing: 2px;
 }
 
-#gameOverDialog::backdrop {
+#titleScreen {
+  position: absolute;
+  left: 50vw;
+  top: 25vh;
+  transform: translate(-50%);
+  background-color: transparent;
+  border: none;
+}
+
+#titleScreen button {
+  font-size: xx-large;
+  background-color: var(--darkColor);
+  color: var(--lightColor);
+  border-radius: 16px;
+  padding: 10px;
+}
+
+#titleScreen::backdrop, #gameOverDialog::backdrop {
   backdrop-filter: blur(4px);
 }
 
