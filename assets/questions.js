@@ -5,7 +5,7 @@ const questionList = [
     'textC' : 'Declaration statements', 
     'correctChoice' : 'C'}, 
 
-    {'question' : " JavaScript, what is a block of statement?",
+    {'question' : " JavaScript, what is a block 'of' statement?",
     'textA' : "Conditional block",
     'textB' : "block that combines a number of statements into a single compound statement",
     'textC' : "block that contains a single statement", 

@@ -3,18 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="./assets/style.css" type="text/css" rel="stylesheet" />
-    <title>Document</title>
+    <title>JavaScript Quiz</title>
   </head>
   <body>
     <div id="grid-container">
       <header id="header">
         <h1>Riddle me this.</h1>
         <div id="navScore">
-
-
-          
           <div id="timerContainer">
             <span id="timerDisplay"></span>
           </div>
@@ -38,20 +35,42 @@
           </ol>
         </div>
 
-        <div id="answers">
-          <button class="answer button" data-choice="A">A</button>
-          <button class="answer button" data-choice="B">B</button>
-          <button class="answer button" data-choice="C">C</button>
+        <div id="choices">
+          <button
+            id="choiceA"
+            class="choice button"
+            data-choice="A"
+            data-choicetext=""
+          >
+            A
+          </button>
+          <button
+            id="choiceB"
+            class="choice button"
+            data-choice="B"
+            data-choicetext=""
+          >
+            B
+          </button>
+          <button
+            id="choiceC"
+            class="choice button"
+            data-choice="C"
+            data-choicetext=""
+          >
+            C
+          </button>
         </div>
-        <button id="skipButton" class="button little">skip</button>
       </main>
       <aside id="aside">
-        <table id="highScores"></table>
         <div id="scoreContainer">
-            Score: <span id="scoreDisplay"></span>
-          </div>
+          SCORE <span id="scoreDisplay"></span>
+          <div id="scoreBuzzer"></div>
+        </div>
+
+        <table id="highScores"></table>
       </aside>
-      <footer id="footer">"who's afraid of the big, black bat?"</footer>
+      <footer id="footer">"how is a raisin like a writing desk?"</footer>
     </div>
   </body>
   <dialog id="gameOverDialog">

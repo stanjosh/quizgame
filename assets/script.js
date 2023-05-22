@@ -1,8 +1,16 @@
+
+var currentQuestionIndex = 0;
+var questionTime = 15;
+var pointsPer = 100;
+var playerScore = 0;
+var gameTimer;
+var timer;
+
 const gameOverDialog = document.getElementById("gameOverDialog");
 const displayHighScore = document.getElementById("displayHighScore");
 const highScoreConfirm = document.getElementById("highScoreConfirm");
 const highScoreName = document.getElementById("highScoreName");
-const skipButton = document.getElementById("skipButton");
+const scoreBuzzer = document.getElementById("scoreBuzzer");
 const timerContainer = document.getElementById("timerContainer");
 const scoreContainer = document.getElementById("scoreContainer");
 const timerDisplay = document.getElementById("timerDisplay");
@@ -12,17 +20,11 @@ const questionText = document.getElementById("questionText");
 const answerTextA = document.getElementById("answerTextA");
 const answerTextB = document.getElementById("answerTextB");
 const answerTextC = document.getElementById("answerTextC");
-const allAnswers = document.getElementById("answers");
-const answerA = document.getElementById("answerA");
-const answerB = document.getElementById("answerB");
-const answerC = document.getElementById("answerC");
-const docRoot = document.querySelector(":root");
-var currentQuestionIndex = 0;
-var questionTime = 15;
-var pointsPer = 100;
-var playerScore = 0;
-var gameTimer;
-var timer;
+const allChoices = document.getElementById("choices");
+const choiceA = document.getElementById("choiceA");
+const choiceB = document.getElementById("choiceB");
+const choiceC = document.getElementById("choiceC");
+
 
 var highScoreList = [
   { name: "rigby", score: 100 },
@@ -31,58 +33,49 @@ var highScoreList = [
   { name: "billy mitchell", score: 500 },
 ];
 
-const chgRootVar = function (setting, val) {
-  docRoot.style.setProperty("--" + setting, val);
-};
-
-allAnswers.addEventListener("click", (event) => {
+allChoices.addEventListener("click", (event) => {
   checkAnswer(event.target.dataset.choice);
   console.log(event.target);
 });
 
-skipButton.addEventListener("click", () => {
-  displayNextQuestion()
-})
-
-
 highScoreConfirm.addEventListener("click", () => {
   addHighScore(highScoreName.value, playerScore);
-  gameOverDialog.close()
-  init()
+  gameOverDialog.close();
+  init();
 });
 
 function endGame() {
   scoreDisplay.innerHTML = playerScore;
   clearInterval(gameTimer);
+  currentQuestionIndex = 0;
   displayHighScore.innerHTML = playerScore;
   gameOverDialog.showModal();
-  score10 = highScoreList.map(a => a.score).slice(-1)
+  score10 = highScoreList.map((a) => a.score).slice(-1);
   if (playerScore > score10) {
-    gameOverMessage.innerHTML = "New high score!"
-    highScoreName.style.visibility = 'visible'
+    gameOverMessage.innerHTML = "New high score!";
+    highScoreName.style.visibility = "visible";
+  } else {
+    highScoreName.style.visibility = "hidden";
+    gameOverMessage.innerHTML = "Game over!";
   }
-  else {
-    highScoreName.style.visibility = 'hidden'
-    gameOverMessage.innerHTML = "Game over!"
-  }
-
-
 }
 
 function updateNavScore() {
   scoreDisplay.innerHTML = playerScore;
-  clearInterval(gameTimer);
-  startGameTimer();
 }
 
 function displayNextQuestion() {
-  
+  clearInterval(gameTimer);
+
   if (currentQuestionIndex < questionList.length) {
+    startGameTimer();
     answerTextA.textContent = questionList[currentQuestionIndex].textA;
     answerTextB.textContent = questionList[currentQuestionIndex].textB;
     answerTextC.textContent = questionList[currentQuestionIndex].textC;
+    choiceA.textContent = questionList[currentQuestionIndex].textA;
+    choiceB.textContent = questionList[currentQuestionIndex].textB;
+    choiceC.textContent = questionList[currentQuestionIndex].textC;
     questionText.textContent = questionList[currentQuestionIndex].question;
-    currentQuestionIndex++
   } else {
     endGame();
   }
@@ -90,19 +83,23 @@ function displayNextQuestion() {
 }
 
 function scoreAnswer() {
-  playerScore += Math.round(pointsPer * timer / 10);
+  playerScore += Math.round((pointsPer * timer) / 10);
 }
 
 function checkAnswer(answer) {
   if (questionList[currentQuestionIndex]["correctChoice"] == answer) {
     console.log("correct!");
+    scoreBuzzer.textContent = "right!";
+    scoreBuzzer.style.color = "var(--panelColor)";
+    punchFade(scoreBuzzer);
     scoreAnswer();
-;
   } else {
     console.log("wrong!");
-    ;
+    scoreBuzzer.textContent = "wrong!";
+    scoreBuzzer.style.color = "var(--lightColor)";
+    punchFade(scoreBuzzer);
   }
-
+  currentQuestionIndex++;
   displayNextQuestion();
 }
 
@@ -116,25 +113,26 @@ function startGameTimer() {
     timerContainer.classList.remove("bigify");
 
     if (timer <= 0) {
-      displayNextQuestion(); 
-    }
-
-    else {
-      if (timer < 5){
+      checkAnswer(0);
+    } else {
+      if (timer <= 5) {
         timerContainer.classList.add("redify");
       }
-    timer--;
-    
-    setTimeout(() => {
-      timerContainer.classList.add("bigify");
-    }, 950);
-  }
+      timer--;
+
+      setTimeout(() => {
+        timerContainer.classList.add("bigify");
+      }, 850);
+    }
   }, 1000);
 }
 
 function addHighScore(name, score) {
   highScoreList.push({ name: name, score: score });
-  localStorage.setItem("highScoreList", JSON.stringify(highScoreList));
+  localStorage.setItem(
+    "highScoreList",
+    JSON.stringify(highScoreList.slice(0, 10))
+  );
 }
 
 function displayHighScores() {
@@ -163,6 +161,22 @@ function init() {
   updateNavScore();
   displayHighScores();
   displayNextQuestion();
+}
+
+function punchFade(elem) {
+  elem.style.opacity = 1;
+  console.log(elem.style.opacity + " elem opacity");
+  let opacity = 50;
+  elem.classList.add("bigify");
+  setInterval(() => {
+    if (opacity > 0) {
+      opacity--;
+      elem.style.opacity = opacity / 50;
+      console.log(opacity);
+      elem.classList.remove("bigify");
+    }
+  }, 50);
+  opacity = 50;
 }
 
 init();
