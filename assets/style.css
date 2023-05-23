@@ -22,14 +22,12 @@ body {
 }
 
 #grid-container {
-  display: grid;
-  grid-template-areas:
-    "header header header"
-    "main main aside"
-    "footer footer footer";
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: 10% 65% 25%;
   grid-template-rows: 13% 80% 7%;
   min-height: 100vh;
+
 }
 
 #header {
@@ -40,6 +38,7 @@ body {
   justify-content: space-between;
   width: 100%;
   overflow: hidden;
+  height: 10vh;
 }
 
 h1 {
@@ -106,8 +105,11 @@ h1 {
 }
 
 #scoreBuzzer {
+  display: flex;
+  flex: 1 0;
   font-size: xxx-large;
   opacity: 1;
+  justify-content: center;
 }
 
 #footer {
@@ -255,17 +257,18 @@ h1 {
   left: 50vw;
   top: 25vh;
   transform: translate(-50%);
-  background-color: transparent;
+  background-color:unset;
   color: var(--lightColor);
-  border: none;
-  overflow: hidden;
+  border: transparent;
+
 }
 
 #titleScreen button {
   font-size: xx-large;
   background-color: var(--darkColor);
   color: var(--lightColor);
-  border-radius: 16px;
+  border-radius: 30px;
+  border: none;
   padding: 10px;
   width: 100%;
   margin-bottom: 15px;
@@ -296,9 +299,7 @@ h1 {
     font-size: xx-large;
   }
 
-  #header {
-    height: 10vh;
-  }
+
 
   #choices {
     flex-direction: row;
@@ -306,6 +307,7 @@ h1 {
   }
 
   .choice {
+    border: 2px solid var(--darkerColor);
     padding: 10px 30px;
     font-size: xxx-large;
     max-height: 90px;
