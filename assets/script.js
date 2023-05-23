@@ -1,6 +1,6 @@
 
 var currentQuestionIndex = 0;
-var questionTime = 10;
+var questionTime = 90;
 var pointsPer = 100;
 var playerScore = 0;
 var gameTimer;
