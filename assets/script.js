@@ -169,12 +169,13 @@ function init() {
 }
 
 function punchFade(elem) {
+  elem.classList.remove('bigify')
   elem.style.opacity = 1;
   let opacity = 50;
-  elem.classList.add("bigify");
+
   elem.style.opacity = 1;
   setInterval(() => {
-    elem.classList.remove('bigify')
+
     if (opacity > 0) {
       opacity--;
       elem.style.opacity = opacity / 50;
