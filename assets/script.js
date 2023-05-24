@@ -2,9 +2,6 @@
 var currentQuestionIndex = 0;
 <<<<<<< HEAD
 var questionTime = 15;
-=======
-var questionTime = 10;
->>>>>>> parent of 0702748 (update screenshots and timer length)
 var pointsPer = 100;
 var playerScore = 0;
 var gameTimer;
@@ -173,7 +170,6 @@ function init() {
 
 function punchFade(elem) {
   elem.style.opacity = 1;
-  console.log(elem.style.opacity + " elem opacity");
   let opacity = 50;
   elem.classList.add("bigify");
   setInterval(() => {
@@ -186,6 +182,5 @@ function punchFade(elem) {
   }, 50);
   opacity = 50;
 }
-
 
 document.getElementById('titleScreen').showModal()
