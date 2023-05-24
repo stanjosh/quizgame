@@ -1,6 +1,6 @@
 
 var currentQuestionIndex = 0;
-var questionTime = 10;
+var questionTime = 15;
 var pointsPer = 100;
 var playerScore = 0;
 var gameTimer;
@@ -12,9 +12,9 @@ const highScoreConfirm = document.getElementById("highScoreConfirm");
 const highScoreName = document.getElementById("highScoreName");
 const scoreBuzzer = document.getElementById("scoreBuzzer");
 const timerContainer = document.getElementById("timerContainer");
-// const scoreContainer = document.getElementById("scoreContainer");
+const scoreContainer = document.getElementById("scoreContainer");
 const timerDisplay = document.getElementById("timerDisplay");
-//const scoreDisplay = document.getElementById("scoreDisplay");
+const scoreDisplay = document.getElementById("scoreDisplay");
 const highScoreElem = document.getElementById("highScores");
 const questionText = document.getElementById("questionText");
 const answerTextA = document.getElementById("answerTextA");
@@ -31,33 +31,31 @@ document.getElementById('startButton').addEventListener('click', () => {
   init()})
 
 var highScoreList = [
-  { name: "rigby", score: 20 },
-  { name: "muscle man", score: 23 },
-  { name: "modercai", score: 22 },
-  { name: "billy mitchell", score: 41 },
+  { name: "rigby", score: 100 },
+  { name: "muscle man", score: 400 },
+  { name: "modercai", score: 200 },
+  { name: "billy mitchell", score: 500 },
 ];
 
 allChoices.addEventListener("click", (event) => {
   checkAnswer(event.target.dataset.choice);
-
+  console.log(event.target);
 });
 
 highScoreConfirm.addEventListener("click", () => {
-  addHighScore(highScoreName.value, timer);
+  addHighScore(highScoreName.value, playerScore);
   gameOverDialog.close();
-  location.reload()
+  init();
 });
 
 function endGame() {
-  //scoreDisplay.innerHTML = playerScore;
-  displayHighScore.innerHTML = timer;
-  playerScore = timer
+  scoreDisplay.innerHTML = playerScore;
   clearInterval(gameTimer);
   currentQuestionIndex = 0;
-  
+  displayHighScore.innerHTML = playerScore;
   gameOverDialog.showModal();
   score10 = highScoreList.map((a) => a.score).slice(-1);
-  if (timer > score10) {
+  if (playerScore > score10) {
     gameOverMessage.innerHTML = "New high score!";
     highScoreName.style.visibility = "visible";
   } else {
@@ -66,15 +64,15 @@ function endGame() {
   }
 }
 
-//function updateNavScore() {
-//  scoreDisplay.innerHTML = playerScore;
-//}
+function updateNavScore() {
+  scoreDisplay.innerHTML = playerScore;
+}
 
 function displayNextQuestion() {
-  //clearInterval(gameTimer);
+  clearInterval(gameTimer);
 
   if (currentQuestionIndex < questionList.length) {
-    //startGameTimer();
+    startGameTimer();
     answerTextA.textContent = questionList[currentQuestionIndex].textA;
     answerTextB.textContent = questionList[currentQuestionIndex].textB;
     answerTextC.textContent = questionList[currentQuestionIndex].textC;
@@ -85,25 +83,22 @@ function displayNextQuestion() {
   } else {
     endGame();
   }
-  // updateNavScore();
+  updateNavScore();
 }
 
-//function scoreAnswer() {
-//  playerScore += Math.round((pointsPer * timer) / 10);
-//}
+function scoreAnswer() {
+  playerScore += Math.round((pointsPer * timer) / 10);
+}
 
 function checkAnswer(answer) {
   if (questionList[currentQuestionIndex]["correctChoice"] == answer) {
+    console.log("correct!");
     scoreBuzzer.textContent = "right!";
     scoreBuzzer.style.color = "var(--panelColor)";
     punchFade(scoreBuzzer);
-    //scoreAnswer();
+    scoreAnswer();
   } else {
-    timer -= 10
-    if (timer <= 0) {
-      timer = 0
-      endGame()
-    }
+    console.log("wrong!");
     scoreBuzzer.textContent = "wrong!";
     scoreBuzzer.style.color = "var(--lightColor)";
     punchFade(scoreBuzzer);
@@ -120,6 +115,7 @@ function startGameTimer() {
     timerDisplay.innerHTML = timer;
     timerContainer.classList.remove("redify");
     timerContainer.classList.remove("bigify");
+
     if (timer <= 0) {
       checkAnswer(0);
     } else {
@@ -127,6 +123,7 @@ function startGameTimer() {
         timerContainer.classList.add("redify");
       }
       timer--;
+
       setTimeout(() => {
         timerContainer.classList.add("bigify");
       }, 850);
@@ -160,24 +157,26 @@ function displayHighScores() {
 }
 
 function init() {
-
+  if (localStorage.getItem("highScoreList")) {
+    highScoreList = JSON.parse(localStorage.getItem("highScoreList"));
+  }
   playerScore = 0;
   currentQuestionIndex = 0;
-  //updateNavScore();
-
-
+  updateNavScore();
+  displayHighScores();
   displayNextQuestion();
-  startGameTimer() // for full-game timer instead of question based
 }
 
 function punchFade(elem) {
   elem.style.opacity = 1;
+  console.log(elem.style.opacity + " elem opacity");
   let opacity = 50;
   elem.classList.add("bigify");
   setInterval(() => {
     if (opacity > 0) {
       opacity--;
       elem.style.opacity = opacity / 50;
+      console.log(opacity);
       elem.classList.remove("bigify");
     }
   }, 50);
@@ -186,7 +185,3 @@ function punchFade(elem) {
 
 
 document.getElementById('titleScreen').showModal()
-if (localStorage.getItem("highScoreList")) {
-  highScoreList = JSON.parse(localStorage.getItem("highScoreList"));
-}
-displayHighScores();
