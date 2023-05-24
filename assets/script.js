@@ -105,7 +105,7 @@ function checkAnswer(answer) {
       endGame()
     }
     scoreBuzzer.textContent = "wrong!";
-    scoreBuzzer.style.color = "var(--darkColor)";
+    scoreBuzzer.style.color = "var(--lightColor)";
     punchFade(scoreBuzzer);
   }
   currentQuestionIndex++;
@@ -171,18 +171,17 @@ function init() {
 }
 
 function punchFade(elem) {
-  elem.classList.remove('bigify')
   elem.style.opacity = 1;
-  let opacity = 30;
-  
+  let opacity = 50;
+  elem.classList.add("bigify");
   setInterval(() => {
-    elem.classList.add('bigify')
     if (opacity > 0) {
       opacity--;
-      elem.style.opacity = opacity / 30;
+      elem.style.opacity = opacity / 50;
+      elem.classList.remove("bigify");
     }
-  }, 10);
-  
+  }, 50);
+  opacity = 50;
 }
 
 
