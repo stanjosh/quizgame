@@ -1,6 +1,5 @@
 
 var currentQuestionIndex = 0;
-<<<<<<< HEAD
 var questionTime = 15;
 var pointsPer = 100;
 var playerScore = 0;
@@ -102,6 +101,7 @@ function checkAnswer(answer) {
     console.log("wrong!");
     scoreBuzzer.textContent = "wrong!";
     scoreBuzzer.style.color = "var(--lightColor)";
+    scoreBuzzer.style.color = "var(--lightColor)";
     punchFade(scoreBuzzer);
   }
   currentQuestionIndex++;
@@ -172,14 +172,16 @@ function punchFade(elem) {
   elem.style.opacity = 1;
   let opacity = 50;
   elem.classList.add("bigify");
+  elem.style.opacity = 1;
   setInterval(() => {
+    elem.classList.remove('bigify')
     if (opacity > 0) {
       opacity--;
       elem.style.opacity = opacity / 50;
-      console.log(opacity);
-      elem.classList.remove("bigify");
+      elem.classList.add("bigify");
     }
   }, 50);
+
   opacity = 50;
 }
 
