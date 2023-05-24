@@ -39,7 +39,6 @@ var highScoreList = [
 
 allChoices.addEventListener("click", (event) => {
   checkAnswer(event.target.dataset.choice);
-  console.log(event.target);
 });
 
 highScoreConfirm.addEventListener("click", () => {
@@ -92,13 +91,11 @@ function scoreAnswer() {
 
 function checkAnswer(answer) {
   if (questionList[currentQuestionIndex]["correctChoice"] == answer) {
-    console.log("correct!");
     scoreBuzzer.textContent = "right!";
     scoreBuzzer.style.color = "var(--panelColor)";
     punchFade(scoreBuzzer);
     scoreAnswer();
   } else {
-    console.log("wrong!");
     scoreBuzzer.textContent = "wrong!";
     scoreBuzzer.style.color = "var(--lightColor)";
     scoreBuzzer.style.color = "var(--lightColor)";
@@ -116,15 +113,15 @@ function startGameTimer() {
     timerDisplay.innerHTML = timer;
     timerContainer.classList.remove("redify");
     timerContainer.classList.remove("bigify");
-
+    if (timer <= 5) {
+      timerContainer.classList.add("redify");
+    }
     if (timer <= 0) {
       checkAnswer(0);
-    } else {
-      if (timer <= 5) {
-        timerContainer.classList.add("redify");
-      }
-      timer--;
+    } 
+    else {
 
+      timer--;
       setTimeout(() => {
         timerContainer.classList.add("bigify");
       }, 850);
@@ -141,6 +138,7 @@ function addHighScore(name, score) {
 }
 
 function displayHighScores() {
+
   let tableRowNumber = 1;
   highScoreElem.innerHTML = "";
   for (var highScore in highScoreList
@@ -158,9 +156,6 @@ function displayHighScores() {
 }
 
 function init() {
-  if (localStorage.getItem("highScoreList")) {
-    highScoreList = JSON.parse(localStorage.getItem("highScoreList"));
-  }
   playerScore = 0;
   currentQuestionIndex = 0;
   updateNavScore();
