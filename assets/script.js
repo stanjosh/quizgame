@@ -1,6 +1,10 @@
 
 var currentQuestionIndex = 0;
+<<<<<<< HEAD
 var questionTime = 15;
+=======
+var questionTime = 10;
+>>>>>>> parent of 0702748 (update screenshots and timer length)
 var pointsPer = 100;
 var playerScore = 0;
 var gameTimer;
