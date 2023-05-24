@@ -7,11 +7,13 @@ The high score table is dynamically generated in the script based on local stora
 
 It has some pizzaz in that the timer is animated to bounce on seconds elapsing and gets all big and stuff when there is five or less seconds on the clock.
 
-But they were, all of them, deceived, for another branch was made. This is a branch where I more closely matched the class criteria. I don't even read the criteria first. The original is [available on github](https://github.com/stanjosh/quizgame/) as well.
+Score is decided by time left * multiplier + base value. These variables are all at the top after a large set of consts.
+
+I threw a start button dialog in last-minute for now. I might make it nicer later.
 
 ## Wow, that's super cool. How do I play?
 
-[Why, here is is! On the world wide web, no less!](https://stanjosh.github.io/quizgame/)
+[here is is on the world wide web](https://stanjosh.github.io/quizgame/)
 
 ## Screenshots
 
